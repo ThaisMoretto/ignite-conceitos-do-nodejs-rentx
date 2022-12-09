@@ -6,6 +6,7 @@ interface IImportCategory {
   name: string;
   description: string;
 }
+
 class ImportCategoryUseCase {
   constructor(private categoriesRepository: CategoriesRepository) {}
 
@@ -23,6 +24,7 @@ class ImportCategoryUseCase {
         categories.push({ name, description });
       })
       .on('end', () => {
+        fs.promises.unlink(file.path);
         resolve(categories);
       })
       .on('error', (error) => {
@@ -45,7 +47,7 @@ class ImportCategoryUseCase {
           description,
         });
       }
-    })
+    });
   }
 }
 
