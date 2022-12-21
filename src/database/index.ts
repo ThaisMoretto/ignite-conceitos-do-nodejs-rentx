@@ -5,13 +5,13 @@ import { Specification } from "../modules/cars/entities/Specification";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
-  host: "localhost",
+  host: "database",
   port: 5432,
   username: "docker",
   password: "123456",
   database: "rentx",
   entities: [Category, Specification],
-  migrations: ["src/database/migrations/*.ts"],
+  migrations: ["./src/database/migrations/*.ts"],
 });
 
 AppDataSource.initialize()
