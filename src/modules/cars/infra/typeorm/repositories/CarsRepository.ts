@@ -1,6 +1,6 @@
 import { Repository } from "typeorm";
 
-import { AppDataSource } from "@shared/infra/typeorm";
+import appDataSource from "@shared/infra/typeorm";
 
 import { ICreateCarDTO } from "@modules/cars/dtos/ICreateCarDTO";
 import { ICarsRepository } from "@modules/cars/repositories/ICarsRepository";
@@ -10,7 +10,7 @@ class CarsRepository implements ICarsRepository {
   private repository: Repository<Car>;
 
   constructor() {
-    this.repository = AppDataSource.getRepository(Car);
+    this.repository = appDataSource.getRepository(Car);
   }
 
   async create({

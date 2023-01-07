@@ -1,25 +1,7 @@
 import "reflect-metadata";
 
-import { DataSource } from "typeorm";
+import AppDataSourceConnection from "@shared/infra/typeorm/data-source";
 
-import { Car } from "@modules/cars/infra/typeorm/entities/Car";
-import { Category } from "@modules/cars/infra/typeorm/entities/Category";
-import { Specification } from "@modules/cars/infra/typeorm/entities/Specification";
-import { User } from "@modules/accounts/infra/typeorm/entities/User";
+const dataSource = AppDataSourceConnection();
 
-export const AppDataSource = new DataSource({
-  type: "postgres",
-  host: "database",
-  port: 5432,
-  username: "docker",
-  password: "123456",
-  database: "rentx",
-  entities: [Category, Specification, User, Car],
-  migrations: ["./src/shared/infra/typeorm/migrations/*.ts"],
-});
-
-AppDataSource.initialize()
-  .then(async () => {
-    console.log("Initializing the database...");
-  })
-  .catch(err => console.log(err));
+export default dataSource;
