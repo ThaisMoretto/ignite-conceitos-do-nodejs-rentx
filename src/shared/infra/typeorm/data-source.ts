@@ -6,6 +6,7 @@ import { Car } from "@modules/cars/infra/typeorm/entities/Car";
 import { Category } from "@modules/cars/infra/typeorm/entities/Category";
 import { Specification } from "@modules/cars/infra/typeorm/entities/Specification";
 import { User } from "@modules/accounts/infra/typeorm/entities/User";
+import { CarImage } from "@modules/cars/infra/typeorm/entities/CarImage";
 
 export default (host = "database"): DataSource => {
   const dataSource = new DataSource({
@@ -15,7 +16,7 @@ export default (host = "database"): DataSource => {
     username: "docker",
     password: "123456",
     database: "rentx",
-    entities: [Category, Specification, User, Car],
+    entities: [Category, Specification, User, Car, CarImage],
     migrations: ["./src/shared/infra/typeorm/migrations/*.ts"],
   });
 
