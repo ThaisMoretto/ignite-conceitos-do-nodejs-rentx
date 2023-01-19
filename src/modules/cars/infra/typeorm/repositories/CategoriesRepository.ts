@@ -1,6 +1,6 @@
 import { Repository } from "typeorm";
 
-import { AppDataSource } from "../../../../../shared/infra/typeorm";
+import appDataSource from "@shared/infra/typeorm";
 
 import {
   ICategoriesRepository,
@@ -13,7 +13,7 @@ class CategoriesRepository implements ICategoriesRepository {
   private repository: Repository<Category>;
 
   constructor() {
-    this.repository = AppDataSource.getRepository(Category);
+    this.repository = appDataSource.getRepository(Category);
   }
 
   async create({ name, description }: ICreateCategoryDTO): Promise<void> {

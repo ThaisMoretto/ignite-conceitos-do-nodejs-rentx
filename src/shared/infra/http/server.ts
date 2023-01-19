@@ -1,15 +1,24 @@
 import "reflect-metadata";
-import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
+import express, { NextFunction, Request, Response } from "express";
 import swaggerUi from "swagger-ui-express";
 
-import "@shared/infra/typeorm";
+import appDataSource from "@shared/infra/typeorm/index";
 
 import "@shared/container";
 import { AppError } from "@shared/errors/AppError";
 
 import swaggerFile from "../../../swagger.json";
 import { router } from "@shared/infra/http/routes";
+
+appDataSource
+  .initialize()
+  .then(() => {
+    console.log("Initializing the database...");
+  })
+  .catch(error => {
+    console.log("Error during Data Source initialization:", error);
+  });
 
 const app = express();
 
